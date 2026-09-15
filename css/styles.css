@@ -1,0 +1,72 @@
+/* Styles extracted from index.html */
+
+html,
+body {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: gainsboro;
+}
+
+header {
+	padding: 16px 24px;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+	margin: 0;
+	font-size: 1.25rem;
+}
+
+nav ul {
+	display: flex;
+	gap: 16px;
+	margin: 0;
+	padding: 8px 24px;
+	list-style: none;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+}
+
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+}
+
+.card {
+	width: 250px;
+	height: 32px;
+	text-align: center;
+	padding: 40px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.card h2 {
+	margin: 0 0 8px;
+	font-size: 1rem;
+}
+
+.card p {
+	margin: 0;
+}
+
+footer {
+	padding: 16px 24px;
+	background: #fff;
+	border-top: 1px solid #ddd;
+}
+
+footer p {
+	margin: 0;
+	font-size: 0.875rem;
+	color: #555;
+}
