@@ -17,7 +17,8 @@ const fs = require('fs');
 const path = require('path');
 
 const REPO_ROOT = path.join(__dirname, '..');
-
+const HTML_PATH = path.join(REPO_ROOT, 'index.html');
+const CSS_PATH = path.join(REPO_ROOT, 'styles.css');
 const REQUIRED_SECTION_IDS = ['contact', 'summary', 'skills', 'experience', 'education'];
 const MIN_CONTRAST_RATIO = 4.5;
 
