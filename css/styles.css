@@ -32,7 +32,7 @@ html,
 body {
 	position: relative;
 	display: block;
-	overflow: hidden;
+	overflow-x: hidden;
 	height: 100%;
 }
 
@@ -57,6 +57,7 @@ header h1 {
 
 nav ul {
 	display: flex;
+	flex-wrap: wrap;
 	gap: var(--space-3);
 	margin: 0;
 	padding: var(--space-2) var(--space-4);
@@ -72,9 +73,15 @@ main {
 	padding: var(--space-4);
 }
 
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
 .card {
 	width: 250px;
-	height: 32px;
+	max-width: 100%;
 	text-align: center;
 	padding: 40px;
 	background: var(--color-surface);
@@ -102,4 +109,46 @@ footer p {
 	margin: 0;
 	font-size: 0.875rem;
 	color: var(--color-text);
+}
+
+/* Tablet and below: stack the page into a single column */
+@media (max-width: 900px) {
+	main {
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+	}
+
+	.card {
+		box-sizing: border-box;
+		width: 100%;
+		margin: 0 auto;
+		padding: var(--space-3);
+	}
+}
+
+/* Phones: single column with tightened spacing and fluid media */
+@media (max-width: 480px) {
+	header,
+	footer {
+		padding: var(--space-2) var(--space-3);
+	}
+
+	nav ul {
+		flex-direction: column;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-3);
+	}
+
+	main {
+		padding: var(--space-3);
+	}
+
+	.card {
+		padding: var(--space-3) var(--space-2);
+	}
+
+	.card h2 {
+		font-size: 0.9375rem;
+	}
 }
