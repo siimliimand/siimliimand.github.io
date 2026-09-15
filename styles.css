@@ -1,0 +1,147 @@
+/* Design tokens */
+:root {
+	--color-bg: #f6f7f9;
+	--color-text: #1b1d22;
+	--color-accent: #2b5fd9;
+	--color-surface: #ffffff;
+	--color-border: #d9dce3;
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 2rem;
+	--max-width: 60rem;
+}
+
+/* Dark mode: override the declared color tokens */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg: #101014;
+		--color-text: #e6e6ea;
+		--color-accent: #7aa2ff;
+		--color-surface: #1b1b21;
+		--color-border: #34343d;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	line-height: 1.6;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+}
+
+header {
+	padding: var(--space-lg) var(--space-md);
+	background-color: var(--color-surface);
+	border-bottom: 1px solid var(--color-border);
+}
+
+header h1 {
+	margin: 0 auto;
+	max-width: var(--max-width);
+	font-size: 1.75rem;
+	color: var(--color-accent);
+}
+
+nav {
+	background-color: var(--color-surface);
+	border-bottom: 1px solid var(--color-border);
+}
+
+nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm) var(--space-md);
+	list-style: none;
+	margin: 0;
+	padding: var(--space-sm) var(--space-md);
+	max-width: var(--max-width);
+	margin-inline: auto;
+}
+
+nav a {
+	color: var(--color-accent);
+	text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus {
+	text-decoration: underline;
+}
+
+main {
+	flex: 1;
+	width: 100%;
+	max-width: var(--max-width);
+	margin-inline: auto;
+	padding: var(--space-lg) var(--space-md);
+}
+
+.card {
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 0.75rem;
+	padding: var(--space-md);
+}
+
+.card h2 {
+	margin-top: 0;
+}
+
+.card img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-radius: 0.5rem;
+}
+
+footer {
+	padding: var(--space-md);
+	background-color: var(--color-surface);
+	border-top: 1px solid var(--color-border);
+}
+
+footer p {
+	margin: 0;
+	max-width: var(--max-width);
+	margin-inline: auto;
+	font-size: 0.875rem;
+}
+
+/* Narrow screens: tighten spacing, single-column flow */
+@media (max-width: 30rem) {
+	header {
+		padding: var(--space-md) var(--space-sm);
+	}
+
+	main {
+		padding: var(--space-md) var(--space-sm);
+	}
+
+	header h1 {
+		font-size: 1.4rem;
+	}
+}
+
+/* Wide screens: lay cards out on a grid */
+@media (min-width: 48rem) {
+	main {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+		gap: var(--space-lg);
+		align-content: start;
+	}
+
+	header h1 {
+		font-size: 2.25rem;
+	}
+}
