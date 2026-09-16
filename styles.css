@@ -71,13 +71,23 @@ body {
 	color: var(--color-text);
 }
 
+/* Link underline: drawn as a bottom gradient and grown on hover/focus
+   by animating background-size instead of toggling text-decoration. */
 a {
 	color: var(--color-accent);
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-repeat: no-repeat;
+	background-position: 0 100%;
+	background-size: 0% 0.08em;
+	transition-property: background-size;
+	transition-duration: 180ms;
+	transition-timing-function: ease-out;
 }
 
 a:hover,
 a:focus {
-	text-decoration: underline;
+	background-size: 100% 0.08em;
 }
 
 img {
@@ -116,11 +126,9 @@ nav ul {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: var(--space-1) var(--space-3);
-	list-style: none;
-	margin: 0;
-	padding: 0;
 }
+
+/* Nav links inherit the shared underline animation from the a rules. */
 
 nav a {
 	color: var(--color-accent);
@@ -210,12 +218,36 @@ section {
 	color: var(--color-background);
 	font-weight: 600;
 	text-decoration: none;
+	transition-property: transform, filter;
+	transition-duration: 180ms;
+	transition-timing-function: ease-out;
 }
 
+/* Hover lift: the CTA rises two pixels, easing back on exit. */
 .button:hover,
 .button:focus {
 	text-decoration: none;
 	filter: brightness(1.08);
+	transform: translateY(-2px);
+}
+
+/* Keyboard focus ring: always visible, never suppressed. */
+:focus-visible {
+	outline: 3px solid var(--color-accent);
+	outline-offset: 2px;
+}
+
+/* Motion guard: collapse transitions and animations to effectively
+   zero duration when the OS asks for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 /* Headings and article flow: flat editorial, no boxes */
