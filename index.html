@@ -5,41 +5,40 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Siim Liimand — Full-Stack Web Developer CV</title>
 	<meta name="description" content="CV of Siim Liimand, freelance full-stack web developer with 15+ years of experience building websites, portals, and e-commerce shops — front-end, back-end, hosting, and maintenance.">
+	<meta name="theme-color" content="#1a5fb4">
 	<meta property="og:title" content="Siim Liimand — Full-Stack Web Developer CV">
 	<meta property="og:description" content="Freelance full-stack web developer with 15+ years of experience: semantic front-end, PHP/Python/Node backends, Linux hosting, WordPress, and long-term maintenance.">
-	<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+	<link rel="icon" href="assets/favicon.svg">
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<header>
-		<h1>Siim Liimand</h1>
-		<p>Full-Stack Web Developer &middot; Estonia &middot; remote-friendly</p>
+		<p class="site-name">Siim Liimand</p>
+		<nav aria-label="Main navigation">
+			<ul>
+				<li><a href="#summary">Summary</a></li>
+				<li><a href="#skills">Skills</a></li>
+				<li><a href="#experience">Experience</a></li>
+				<li><a href="#education">Education</a></li>
+				<li><a href="mailto:siim.liimand@gmail.com">Email me</a></li>
+			</ul>
+		</nav>
 	</header>
-	<nav aria-label="Main navigation">
-		<ul>
-			<li><a href="#contact">Contact</a></li>
-			<li><a href="#summary">Summary</a></li>
-			<li><a href="#skills">Skills</a></li>
-			<li><a href="#experience">Experience</a></li>
-			<li><a href="#education">Education</a></li>
-			<li><a href="mailto:siim.liimand@gmail.com">Email me</a></li>
-		</ul>
-	</nav>
 	<main>
-		<section id="contact" class="card">
-			<h2>Contact</h2>
+		<section id="hero" class="hero">
 			<img src="hero.svg"
 				alt="Gradient hero image with deep blue, violet, and pink tones"
-				width="640" height="360">
-			<ul>
-				<li>Email: <a href="mailto:siim.liimand@gmail.com">siim.liimand@gmail.com</a></li>
-				<li>GitHub: <a href="https://github.com/siimliimand" rel="me noopener">github.com/siimliimand</a></li>
-				<li>Location: Estonia — remote-friendly, working with clients across time zones</li>
-			</ul>
-			<p>Availability: freelance engagements, fixed-scope projects, and long-term maintenance retainers.</p>
+				width="640" height="360" loading="eager" fetchpriority="high">
+			<h1>Siim <span class="accent">Liimand</span></h1>
+			<p class="tagline">Full-Stack Web Developer &middot; Estonia &middot; remote-friendly</p>
+			<p>Available for freelance engagements, fixed-scope projects, and long-term maintenance retainers.</p>
+			<p class="actions">
+				<a class="button" href="mailto:siim.liimand@gmail.com">Email me</a>
+				<a href="https://github.com/siimliimand" rel="me noopener">github.com/siimliimand</a>
+			</p>
 		</section>
 
-		<section id="summary" class="card">
+		<section id="summary">
 			<h2>Summary</h2>
 			<p>Freelance web developer with 15+ years of hands-on experience building websites,
 				customer portals, and e-commerce shops for small businesses, agencies, and independent
@@ -53,7 +52,7 @@
 				keeping architectural decisions, security review, and final quality control firmly human.</p>
 		</section>
 
-		<section id="skills" class="card">
+		<section id="skills">
 			<h2>Skills</h2>
 
 			<h3>Languages</h3>
@@ -94,7 +93,7 @@
 			</ul>
 		</section>
 
-		<section id="experience" class="card">
+		<section id="experience">
 			<h2>Experience</h2>
 
 			<article>
@@ -136,7 +135,7 @@
 			</article>
 		</section>
 
-		<section id="education" class="card">
+		<section id="education">
 			<h2>Education</h2>
 			<article>
 				<h3>Diploma-level studies in informatics / software development</h3>
