@@ -217,11 +217,30 @@ section {
 .hero img {
 	position: absolute;
 	inset: 0;
-	z-index: -2;
+	z-index: -3;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
+}
+
+/* Decorative name-shaped backdrop echoing the headline. It sits between
+   the photo and the scrim at a whisper of opacity, hidden from assistive
+   technology and pinned below the headline in the stacking order. */
+.hero-background-name {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: clamp(4rem, 16vw, 12rem);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	color: var(--color-text);
+	opacity: 0.12;
+	pointer-events: none;
+	user-select: none;
 }
 
 /* Scrim sits between the image and the text for contrast in both themes */
@@ -233,7 +252,13 @@ section {
 	background: rgba(246, 247, 249, 0.55);
 }
 
-.hero > :not(img) {
+/* Headline: raised above every decorative layer (photo, name, scrim). */
+.hero h1 {
+	position: relative;
+	z-index: 0;
+}
+
+.hero > :not(img):not(.hero-background-name) {
 	width: 100%;
 	max-width: 36rem;
 	margin: 0;
@@ -399,7 +424,8 @@ footer p {
 	}
 
 	.hero img,
-	.hero::after {
+	.hero::after,
+	.hero-background-name {
 		display: none;
 	}
 
