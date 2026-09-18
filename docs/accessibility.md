@@ -93,19 +93,17 @@ dark, 1.33:1 / 1.51:1) is a purely decorative separator with no information cont
 The hero image (`hero.svg`) is a gradient whose brightest pixel is pure white (the radial
 glow's center). Because the checker composites translucent colors over the background they
 paint, the harshest real backdrop is the scrim at 55% alpha over that white — light theme
-`rgb(250, 251, 252)`, dark theme `rgb(124, 124, 126)`. The light-theme hero text clears
-4.5:1 against even that (15.63:1 body, 6.02:1 accent). The dark theme does **not** clear it
-there (3.35:1 body, 2.23:1 accent), which is exactly why the dark scrim is a dark veil:
-with it, the effective backdrop is `#101014` and every dark-theme pair above passes. Do not
-lighten `rgba(16, 16, 20, 0.55)` without re-running these commands.
-
-## Reproducing
+`rgb(250, 251, 252)`, dark theme `rgb(124, 124, 126)`. Against even that, the light-theme
+hero text clears 4.5:1 (16.27:1 body, 6.08:1 accent); the dark theme does **not** (3.41:1
+body, 2.29:1 accent). This is exactly why the dark scrim is a dark veil: with it, the
+effective backdrop is `#101014` and every dark-theme pair above passes. Do not lighten
+`rgba(16, 16, 20, 0.55)` without re-running these commands.
 
 ```sh
 for pair in "#1a5fb4 #f6f7f9" "#0f3d75 #f6f7f9" "#1b1d22 #f6f7f9" \
             "#8ec5ff #101014" "#a8d4ff #101014" "#e8e8ee #101014" \
             "rgb(24, 95, 180) #f6f7f9" "rgb(141, 197, 255) #101014"; do
-	node test/a11y-checks.mjs contrast $pair
+	node test/a11y-checks.mjs contrast "$pair"
 done
 ```
 
