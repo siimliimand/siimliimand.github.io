@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>hero fixture — fail</title>
+	<style>
+		.hero {
+			position: relative;
+			isolation: isolate;
+			display: grid;
+			place-items: center;
+			min-height: 60vh;
+		}
+
+		/* Same backdrop as the pass fixture, but the z-index declaration is
+		   omitted, so the layer is not pinned below the headline. */
+		[data-hero-layer="background-name"] {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			font-size: 18vw;
+			font-weight: 700;
+			color: currentColor;
+			opacity: 0.1;
+			pointer-events: none;
+			user-select: none;
+		}
+
+		.hero h1 {
+			position: relative;
+			z-index: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<section class="hero">
+		<div aria-hidden="true" data-hero-layer="background-name">Siim Liimand</div>
+		<h1>Siim Liimand</h1>
+	</section>
+</body>
+</html>

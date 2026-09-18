@@ -1,4 +1,4 @@
-/* CV stylesheet: a full-viewport hero under a sticky translucent header.
+/* CV stylesheet: a full-viewport hero under a sticky header.
    Palette, spacing, and type are declared as custom properties on :root
    and referenced with var() throughout. */
 
@@ -10,6 +10,15 @@
 	--color-background: #f6f7f9;
 	--color-surface: #ffffff;
 	--color-accent: oklch(49.2% 0.151 256);
+
+	/* Header + nav palette (light): opaque hex, not rgba literals, so the
+	   WCAG ratios are checkable with test/a11y-checks.mjs. Nav links keep
+	   >= 4.5:1 against --header-bg and the active-page indicator keeps
+	   >= 3:1 (WCAG 1.4.11 non-text contrast). */
+	--header-bg: #f6f7f9;
+	--nav-link-color: #1a5fb4;
+	--nav-link-hover-color: #0f3d75;
+	--nav-active-color: #0f3d75;
 
 	/* Spacing scale */
 	--space-1: 0.25rem;
@@ -24,18 +33,25 @@
 }
 
 /* Re-declare the palette when the OS asks for a dark theme.
-   The translucent header, scrim, and divider colors are restated here
-   because their alpha values are baked into rgba() literals. */
+   The header, scrim, and divider colors are restated here because they are
+   theme-specific values, not inherited from the light tokens. */
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-text: #e8e8ee;
 		--color-background: #101014;
 		--color-surface: #1b1b21;
 		--color-accent: oklch(80.7% 0.101 250);
+
+		/* Header + nav palette (dark): same guarantees, against the dark
+		   header surface this time. */
+		--header-bg: #101014;
+		--nav-link-color: #8ec5ff;
+		--nav-link-hover-color: #a8d4ff;
+		--nav-active-color: #a8d4ff;
 	}
 
 	header {
-		background-color: rgba(16, 16, 20, 0.72);
+		background-color: var(--header-bg);
 		border-bottom-color: rgba(232, 232, 238, 0.16);
 	}
 
@@ -96,7 +112,7 @@ img {
 	height: auto;
 }
 
-/* Header: sticky and translucent so the hero scrolls beneath it */
+/* Header: sticky and opaque, so the nav palette can be checked against it */
 
 header {
 	position: sticky;
@@ -108,7 +124,7 @@ header {
 	justify-content: space-between;
 	gap: var(--space-2) var(--space-4);
 	padding: var(--space-3);
-	background-color: rgba(246, 247, 249, 0.72);
+	background-color: var(--header-bg);
 	-webkit-backdrop-filter: blur(0.75rem);
 	backdrop-filter: blur(0.75rem);
 	border-bottom: 1px solid rgba(27, 29, 34, 0.14);
@@ -128,16 +144,41 @@ nav ul {
 	justify-content: center;
 }
 
-/* Nav links inherit the shared underline animation from the a rules. */
+/* Nav links leave the shared accent token: their colour is the checked
+   --nav-link-color token, guaranteed >= 4.5:1 against --header-bg. */
 
 nav a {
-	color: var(--color-accent);
+	color: var(--nav-link-color);
 	text-decoration: none;
 }
 
 nav a:hover,
-nav a:focus {
+nav a:focus,
+nav a:focus-visible {
+	color: var(--nav-link-hover-color);
 	text-decoration: underline;
+}
+
+/* Keyboard focus ring for nav links: drawn in the resting link colour, so
+   the ring itself also clears the 3:1 non-text minimum on the header. */
+nav a:focus-visible {
+	outline: 3px solid var(--nav-link-color);
+	outline-offset: 2px;
+}
+
+/* Active page: colour plus an underline (not colour alone), both in the
+   checked --nav-active-color token, >= 3:1 against --header-bg. */
+nav a[aria-current="page"] {
+	color: var(--nav-active-color);
+	text-decoration: underline;
+	text-decoration-thickness: 0.14em;
+	text-underline-offset: 0.2em;
+}
+
+nav a[aria-current="page"]:hover,
+nav a[aria-current="page"]:focus,
+nav a[aria-current="page"]:focus-visible {
+	color: var(--nav-link-hover-color);
 }
 
 /* Main: full-width canvas, each section centered on the measure */
@@ -176,11 +217,30 @@ section {
 .hero img {
 	position: absolute;
 	inset: 0;
-	z-index: -2;
+	z-index: -3;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
+}
+
+/* Decorative name-shaped backdrop echoing the headline. It sits between
+   the photo and the scrim at a whisper of opacity, hidden from assistive
+   technology and pinned below the headline in the stacking order. */
+.hero-background-name {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: clamp(4rem, 16vw, 12rem);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	color: var(--color-text);
+	opacity: 0.12;
+	pointer-events: none;
+	user-select: none;
 }
 
 /* Scrim sits between the image and the text for contrast in both themes */
@@ -192,7 +252,13 @@ section {
 	background: rgba(246, 247, 249, 0.55);
 }
 
-.hero > :not(img) {
+/* Headline: raised above every decorative layer (photo, name, scrim). */
+.hero h1 {
+	position: relative;
+	z-index: 0;
+}
+
+.hero > :not(img):not(.hero-background-name) {
 	width: 100%;
 	max-width: 36rem;
 	margin: 0;
@@ -358,7 +424,8 @@ footer p {
 	}
 
 	.hero img,
-	.hero::after {
+	.hero::after,
+	.hero-background-name {
 		display: none;
 	}
 
